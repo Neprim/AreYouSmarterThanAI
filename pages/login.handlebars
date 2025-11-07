@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="auth-container bg-white">
+        <h2 class="text-center mb-3">Кто вы?</h2>
+        
+        <p class="description text-center">
+            Просто введите имя и кодовое слово, которое выбрали, когда зашли. Ну или нажмите "Я тут впервые".
+        </p>
+
+        <form>
+            <div class="mb-3">
+                <label for="login" class="form-label">Имя:</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите имя" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Кодовое слово:</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите кодовое слово" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Войти</button>
+            <button onclick="window.location.href = `/register`" class="btn btn-secondary w-100">Я тут впервые</button>
+        </form>
+    </div>
+</div>

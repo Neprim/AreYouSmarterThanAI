@@ -1,0 +1,28 @@
+<div class="container results-container">
+
+    <h4 class="mb-3">Мои попытки:</h4>
+
+    <div class="mb-3">
+    {{#if result}}
+        <h5>Ваш общий результат: {{correct}}/{{total}}</h5>
+    {{else}}
+        <h5>Вы ещё не проходили тесты</h5>
+    {{/if}}
+    </div>
+    <button onclick="window.location.href = `/test`" class="btn btn-secondary">Новый тест</button>
+
+
+    {{#if results}}
+    {{#each results}}
+    <div class="table-container">
+        <div id="resultsTable">
+            {{this}}
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+    
+    <button onclick="window.location.href=`/table`" class="btn btn-primary btn-custom" id="globalResultsBtn">
+        Посмотреть общую таблицу
+    </button>
+</div>

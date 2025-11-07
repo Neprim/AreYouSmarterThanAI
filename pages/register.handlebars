@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="auth-container bg-white">
+        <h2 class="text-center mb-3">Кто вы?</h2>
+        
+        <p class="description text-center">
+            Просто введите ваше имя, ник или любой идентификатор и кодовое слово к нему. Имя будет использоваться, чтобы отображать вас в общей таблице (если я её запилю), а кодовое слово - чтобы вы могли залогиниться с другого устройства. Ну или нажмите "Я уже есть", чтобы войти по старому имени.
+        </p>
+
+        <form>
+            <div class="mb-3">
+                <label for="login" class="form-label">Имя:</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите имя" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Кодовое слово:</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите кодовое слово" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Запомнить меня</button>
+            <button onclick="window.location.href = `/login`" class="btn btn-secondary w-100">Я уже есть</button>
+        </form>
+    </div>
+</div>
