@@ -2,8 +2,33 @@ const Express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const handlebars = require('express-handlebars')
+const fs = require("fs")
 require('dotenv').config()
 const path = require('path');
+
+let _db = {users: {}}
+if (fs.existsSync("db.json")) {
+    _db = require("./db.json")
+}
+
+let update_time = 0
+global.db = new Proxy(_db, {
+    get(target, prop) {
+        if (prop == "users") {
+            update_time = Date.now()
+            setTimeout(() => {
+                if (update_time <= Date.now() + 1000) {
+                    fs.writeFileSync("db.json", JSON.stringify(_db))
+                    update_time = Date.now()
+                }
+            }, 1000)
+        }
+
+        return target[prop]
+    }
+})
+
+global.questions = require("./questions.json")
 
 global.app = Express()
 app.use(bodyParser.urlencoded({ extended: false }))

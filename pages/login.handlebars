@@ -6,15 +6,21 @@
             Просто введите имя и кодовое слово, которое выбрали, когда зашли. Ну или нажмите "Я тут впервые".
         </p>
 
-        <form>
+        <form method="post">
             <div class="mb-3">
                 <label for="login" class="form-label">Имя:</label>
-                <input type="text" class="form-control" id="login" placeholder="Введите имя" required>
+                <input type="text" class="form-control" name="username" placeholder="Введите имя" required>
+                {{#if error_login}}
+                <small class="form-text form-text">{{error_login}}</small>
+                {{/if}}
             </div>
             
             <div class="mb-3">
                 <label for="password" class="form-label">Кодовое слово:</label>
-                <input type="password" class="form-control" id="password" placeholder="Введите кодовое слово" required>
+                <input type="password" class="form-control" name="password" placeholder="Введите кодовое слово" required>
+                {{#if error_password}}
+                <small class="form-text form-text">{{error_password}}</small>
+                {{/if}}
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mb-3">Войти</button>

@@ -1,15 +1,32 @@
 <div class="container results-container">
+    <div class="d-flex justify-content-end mb-3">
+        <button onclick="window.location.href=`/table`" class="btn btn-primary" id="globalResultsBtn">
+            Общая таблица
+        </button>
+    </div>
 
     <h4 class="mb-3">Мои попытки:</h4>
 
     <div class="mb-3">
-    {{#if result}}
-        <h5>Ваш общий результат: {{correct}}/{{total}}</h5>
+    {{#unless user}}
+        <h5>А кто вы?</h5>
+        <button onclick="window.location.href = `/register`" class="btn btn-secondary w-100">Я тут впервые</button>
     {{else}}
-        <h5>Вы ещё не проходили тесты</h5>
-    {{/if}}
+        {{#if result}}
+            <h5>Ваш общий результат: {{correct}}/{{total}}</h5>
+        {{else}}
+            <h5>Вы ещё не проходили тесты</h5>
+        {{/if}}
+
+        <button onclick="window.location.href = `/test`" class="btn btn-secondary">
+            {{#if continue_test}}
+                Продолжить тест
+            {{else}}
+                Новый тест
+            {{/if}}
+        </button>
+    {{/unless}}
     </div>
-    <button onclick="window.location.href = `/test`" class="btn btn-secondary">Новый тест</button>
 
 
     {{#if results}}
@@ -21,8 +38,4 @@
     </div>
     {{/each}}
     {{/if}}
-    
-    <button onclick="window.location.href=`/table`" class="btn btn-primary btn-custom" id="globalResultsBtn">
-        Посмотреть общую таблицу
-    </button>
 </div>

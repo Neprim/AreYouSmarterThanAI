@@ -39,6 +39,57 @@
             margin: 0 auto;
             display: block;
         }
+        .question-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        .question-number {
+            font-size: 1.2rem;
+            color: #6c757d;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #212529;
+        }
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .answer-btn {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.1rem;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            transition: all 0.2s;
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+        .answer-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+            transform: translateY(-2px);
+        }
+        .answer-btn.selected {
+            background-color: #d1ecf1;
+            border-color: #0dcaf0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #confirmBtn:disabled {
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
