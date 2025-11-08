@@ -113,8 +113,26 @@ Router.get(`/test`, (req, res) => {
 Router.post(`/test`, (req, res) => {
     if (!req.user)
         return res.redirect("/")
+    
+    let n = req.body
+    let qs = req.user.questions
+    
+    if (qs[qs.length - 1]?.length != 1) {
+        return res.render('/')
+    }
+        
+    qs[qs.length - 1][1] = n.selected_answer
 
-    res.render('test', { user: req.user })
+    if (qs.length % 10 == 0) {
+        let correct_answers = 0
+        for (let i = 0; i < 10; i++) {
+            if (questions[qs[qs.length - 1 - i][0]].answer == qs[qs.length - 1 - i][1])
+                correct_answers++
+        }
+        return res.render('results', { user: req.user, correct_answers: correct_answers })
+    }
+
+    res.redirect('/test')
 })
 
 module.exports = Router
