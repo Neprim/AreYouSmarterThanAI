@@ -85,8 +85,39 @@ Router.post(`/login`, async (req, res) => {
     return res.redirect("/")
 })
 
+const questions_amount =  Object.keys(questions).length
 Router.get(`/`, (req, res) => {
-    res.render('main', { user: req.user, continue_test: req?.user?.questions?.[req?.user?.questions?.length - 1]?.length == 1 })
+    let correct_answers = 0
+    const qs = req?.user?.questions
+    let tests = []
+    for (let i = 0; i < Math.floor((qs?.length - (qs?.[qs?.length - 1].length == 1)) / 10); i++) {
+        let test = {
+            correct_answers: 0,
+            correct_percent: 0,
+        }
+        for (let j = 0; j < 10; j++) {
+            let q = req.user.questions[i * 10 + j]
+            correct_answers += (questions[q[0]].answer == q[1])
+            test.correct_answers += (questions[q[0]].answer == q[1])
+        }
+        test.correct_percent = Math.round(test.correct_answers * 100) / 10
+        tests.push(test)
+    }
+    
+    tests.reverse()
+
+    const correct_percent = Math.round(correct_answers / Math.floor((qs?.length - (qs?.[qs?.length - 1].length == 1)) / 10) * 100) / 10
+
+    res.render('main', { 
+        user: req.user, 
+        continue_test: req?.user?.questions?.[req?.user?.questions?.length - 1]?.length == 1, 
+        tests_available: req?.user?.questions?.length < questions_amount, 
+        questions_amount: questions_amount,
+        correct_answers: correct_answers,
+        total_answers: Math.floor((qs?.length - (qs?.[qs?.length - 1].length == 1)) / 10) * 10,
+        correct_percent: correct_percent,
+        tests: tests,
+    })
 })
 
 const irand = (min, max) => Math.floor(Math.random() * (max - min) + min)
@@ -101,6 +132,10 @@ Router.get(`/test`, (req, res) => {
         const free_qs = questions
             .map((q, ind) => {return {...q, ind: ind}})
             .filter((q) => !qs.find((uq) => q.ind == uq[0]))
+
+        if (free_qs.length == 0) {
+            return res.redirect("/")
+        }
 
         req.user.questions.push([free_qs[irand(0, free_qs.length)].ind])
     }

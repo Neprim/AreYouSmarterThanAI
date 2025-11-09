@@ -12,30 +12,36 @@
         <h5>А кто вы?</h5>
         <button onclick="window.location.href = `/register`" class="btn btn-secondary w-100">Я тут впервые</button>
     {{else}}
-        {{#if result}}
-            <h5>Ваш общий результат: {{correct}}/{{total}}</h5>
+        {{#if total_answers}}
+            <h5>Ваш общий результат: {{correct_answers}}/{{total_answers}} ({{correct_percent}}%)</h5>
         {{else}}
             <h5>Вы ещё не проходили тесты</h5>
         {{/if}}
 
-        <button onclick="window.location.href = `/test`" class="btn btn-secondary">
-            {{#if continue_test}}
-                Продолжить тест
-            {{else}}
-                Новый тест
-            {{/if}}
-        </button>
+        {{#if tests_available}}
+            <button onclick="window.location.href = `/test`" class="btn btn-secondary">
+                {{#if continue_test}}
+                    Продолжить тест
+                {{else}}
+                    Новый тест
+                {{/if}}
+            </button>
+        {{else}}
+            <h6>Ничего себе, вы ответили на все {{questions_amount}} вопросов. К сожалению, больше тестов нет.</h6>
+        {{/if}}
     {{/unless}}
     </div>
 
 
-    {{#if results}}
-    {{#each results}}
-    <div class="table-container">
-        <div id="resultsTable">
-            {{this}}
+    {{#if tests}}
+    <div class="answers-grid">
+        {{#each tests}}
+        <div class="table-container">
+            <div id="resultsTable">
+                {{this.correct_answers}}/10 ({{this.correct_percent}}%)
+            </div>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
     {{/if}}
 </div>
